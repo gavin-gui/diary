@@ -1,0 +1,54 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.3.RELEASE'
+	}
+	repositories {
+		mavenLocal()
+		maven { url 'http://maven.aliyun.com/nexus/content/group/public/'}
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+
+repositories {
+	mavenLocal()
+	maven { url 'http://maven.aliyun.com/nexus/content/group/public/'}
+	mavenCentral()
+}
+
+
+
+dependencies {
+//	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+//	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-web') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+	//spring-boot-starter-thymeleaf默认使用thymeleaf2，这里手动添加thymeleaf3
+	compile("org.thymeleaf:thymeleaf:3.0.2.RELEASE")
+	compile("org.thymeleaf:thymeleaf-spring4:3.0.2.RELEASE")
+	compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.1.1")
+	compile('mysql:mysql-connector-java')
+	compile('org.springframework.boot:spring-boot-starter-undertow')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+bootRun {
+	addResources=true
+}
+
+springBoot{
+	mainClass='com.gui.DiaryApplication'
+}

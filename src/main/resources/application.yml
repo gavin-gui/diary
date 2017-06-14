@@ -1,0 +1,44 @@
+server:
+  port: 81
+  undertow:
+    accesslog:
+      dir: ${config.logDir}
+      enabled: true
+    direct-buffers: true
+    worker-threads: 20
+    buffer-size: 512
+    io-threads: 2
+
+config:
+  logDir: './logs'
+
+spring:
+  application:
+    name: 'diary'
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.105:3306/diary
+    username: root
+    password: 123456
+  thymeleaf:
+    mode: HTML5
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+#logging:
+#  file: ./logs/diary.log
+#  level:
+#    com:
+#      gui: info
+#    org:
+#      springframework:
+#        web: info
+#      hibernate: error
+
+
+
