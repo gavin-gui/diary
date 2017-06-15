@@ -1,11 +1,13 @@
 package com.gui.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Created by Administrator on 2017/6/15.
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class TipException extends RuntimeException {
 
     private String errMsg;

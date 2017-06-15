@@ -8,9 +8,7 @@ import com.gui.utils.Md5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.DateUtils;
 
 import javax.servlet.http.HttpSession;
@@ -29,7 +27,6 @@ public class UserController {
     public String login(User user, Model model, HttpSession session) {
         try {
             User user1 = userService.login(user);
-
             session.setAttribute(user1.getId()+"",user1);
             return "index";
         } catch (TipException e) {
@@ -40,13 +37,14 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String registry(@RequestParam("userName") String userName, @RequestParam("password") String password, Model model) {
         //检查用户是否已存在
         boolean isExists = false;
         isExists = userService.checkUserExists(userName);
         if(isExists) {
             model.addAttribute("errMsg","用户名已存在");
-            return "registry";
+            return "register";
         }
 
         //保存用户信息

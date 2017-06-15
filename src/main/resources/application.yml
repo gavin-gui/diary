@@ -17,7 +17,7 @@ spring:
     name: 'diary'
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/diary
+    url: jdbc:mysql://192.168.1.105:3306/diary
     username: root
     password: 123456
   thymeleaf:
@@ -28,6 +28,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: true
 
 
 #logging:
