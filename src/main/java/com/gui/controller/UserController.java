@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.util.DateUtils;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -32,7 +31,6 @@ public class UserController {
         } catch (TipException e) {
             model.addAttribute("errMsg",e.getErrMsg());
         }
-
         return "login";
     }
 
@@ -40,8 +38,8 @@ public class UserController {
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String registry(@RequestParam("userName") String userName, @RequestParam("password") String password, Model model) {
         //检查用户是否已存在
-        boolean isExists = false;
-        isExists = userService.checkUserExists(userName);
+        boolean isExists = userService.checkUserExists(userName);
+        //如果用户存在，返回注册页面
         if(isExists) {
             model.addAttribute("errMsg","用户名已存在");
             return "register";
@@ -55,7 +53,7 @@ public class UserController {
         user.setCreateDate(DateKit.format(now));
         user.setUpdateDate(DateKit.format(now));
         userService.saveUser(user);
-
+        //跳转到登录页面
         return "login";
     }
 
